@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Table } from "../components/organism/Table";
 import { Form } from "../components/organism/Form";
 import { Pagination } from "../components/molecules/Pagination";
-
+import "../styles/Table.css"
 /* Form fields = key={index}
                         text={field.text} 
                         refInput={field.refInput} 

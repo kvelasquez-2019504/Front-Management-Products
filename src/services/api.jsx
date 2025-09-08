@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://back-management-products-git-main-kenneths-projects-f2cc3263.vercel.app',
+  baseURL: 'https://back-management-products.vercel.app',
 });
 
 export const getProducts = async (currentPage, itemsPerPage) => {

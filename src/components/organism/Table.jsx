@@ -1,5 +1,4 @@
 import { TableRow } from "../molecules/TableRow"
-import '../../styles/table.css'
 
 
 export const Table = ({ rows, headers, delete:deleteProduct, edit:editProduct }) => {
