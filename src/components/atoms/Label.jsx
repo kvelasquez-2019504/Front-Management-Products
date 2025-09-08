@@ -1,7 +1,7 @@
-export const Label = ({text,refInput,description}) => {
+export const Label = ({style,refInput,description}) => {
     return (
         <>
-            <label htmlFor={refInput}>{description}</label>
+            <label htmlFor={refInput} className={style}>{description}</label>
         </>
     )
 }

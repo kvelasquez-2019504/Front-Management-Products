@@ -8,12 +8,14 @@ export const InputForm = (
     ) => {
     return (
         <>
-            <Label text={text} refInput={refInput} description={description} />
-            <Input type={type} name={refInput} id={refInput}
-                value={value} error={error} onChange={onChange} onBlur={onBlur} />
-            {
-                error && (<Label text={text} refInput={refInput} description={error} />)
-            }
+            <div className='input-form'>
+                <Label text={text} refInput={refInput} description={description} />
+                <Input type={type} name={refInput} id={refInput}
+                    value={value} error={error} onChange={onChange} onBlur={onBlur} />
+                {
+                    error && (<Label style="error" text={text} refInput={refInput} description={error} />)
+                }
+            </div>
         </>
     )
 }

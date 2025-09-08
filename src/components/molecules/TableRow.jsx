@@ -23,11 +23,11 @@ export const TableRow = ({idRow, columns, isHeader,
                                 <Celds key={index}>
                                     <div className="actions">
                                         <button className="delete-button" 
-                                        onClick={(event)=>deleteProduct(idRow)}>
+                                        onClick={(event)=>{deleteProduct(idRow)}}>
                                             Eliminar
                                         </button>
                                         <button className="edit-button" 
-                                        onClick={(event)=>editProduct(idRow)}>
+                                        onClick={(event)=>{editProduct(idRow)}}>
                                             Editar
                                         </button>
                                     </div>

@@ -1,11 +1,10 @@
 import { InputForm } from "../molecules/InputForm";
+import '../../styles/Form.css'
 // InputForm= text,refInput,description, type, value, error, onChange, onBlur
-export const Form = ({id, fields=[]}) => {
-    console.log(fields);
-    
+export const Form = ({id, fields=[], actionForm, closeForm}) => {
   return (
     <>
-        <form id={id} >
+        <form id={id} className="form">
             {
                 Object.entries(fields).map( ([key, value], index) => (
                     <InputForm key={index}
@@ -19,8 +18,10 @@ export const Form = ({id, fields=[]}) => {
                     />
                 ))
             }
-            <button type="submit" className="submit-button">Enviar</button>
-            <button type="button" className="cancel-button">Cancelar</button>
+            <div className="form-buttons">
+                <button type="button" className="submit-button" onClick={(e)=>actionForm(e)}>Enviar</button>
+                <button type="button" className="cancel-button" onClick={closeForm}>Cancelar</button>
+            </div>
         </form> 
     </>
   )

@@ -3,6 +3,9 @@ import '../../styles/table.css'
 
 
 export const Table = ({ rows, headers, delete:deleteProduct, edit:editProduct }) => {
+    const removeColumnId= (data)=>{
+        return data.slice(1);
+    }
     return (
         <>
             <table className="custom-table">
@@ -13,7 +16,7 @@ export const Table = ({ rows, headers, delete:deleteProduct, edit:editProduct })
                     {
                         rows.length > 0 ? (
                             rows.map((row, index) => (
-                                <TableRow idRow={row[0]} key={index} columns={row} 
+                                <TableRow idRow={row[0]} key={index} columns={removeColumnId(row)} 
                                     delete={deleteProduct} edit={editProduct} />
                             ))
                         ) : (
