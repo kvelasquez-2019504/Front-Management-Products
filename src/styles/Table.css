@@ -1,0 +1,39 @@
+.custom-table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-header {
+    background-color: var(--second-color);
+    color: var(--white-color);
+}
+
+.table-header-cell{
+    padding: 5px;
+    text-align: left;
+}
+
+.table-cell, .table-header-cell{
+    padding: 5px;
+    border:1px solid var(--third-color)
+}
+
+.actions{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+.actions button{
+    height:30px;
+    width:100%;
+    border:none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--white-color);
+}
+.delete-button{
+    background-color: var(--color-red);
+}
+.edit-button{
+    background-color: var(--blue-color);
+}
