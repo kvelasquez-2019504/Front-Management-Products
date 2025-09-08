@@ -11,7 +11,7 @@ export const Header = () => {
             <header>
                 <nav>
                     <a href="/" className="link-logo">
-                        <img src="../../../public/Burst.svg" alt="Logo" 
+                        <img src="../Burst.svg" alt="Logo" 
                             className="img-logo" />
                     </a>
                     <ul>
