@@ -50,14 +50,11 @@ img{
 
 main{
   margin: 25px auto;
+  padding: 0px 10px;
   display: flex;
   flex-direction: column;
   max-width: 1200px;
   justify-content: center;
-}
-
-.section-template{
-  margin: 0px 10px;
 }
 
 .header-section{
@@ -69,6 +66,9 @@ main{
 
 .table-section{
   border-radius:5px;
+  overflow: auto;
+  max-height: 500px;
+  position: relative;
 }
 
 .form-section{
@@ -101,4 +101,34 @@ main{
 
 .add-button:hover{
   background-color: var(--third-color);
+}
+
+.pagination{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.pagination button{
+  background-color: var(--first-color);
+  color: var(--white-color);
+  border:none;
+  padding:8px 12px;
+  border-radius:5px;
+  cursor:pointer;
+  font-weight:600;
+  transition: background-color .3s ease-in-out;
+}
+.pagination button:disabled{
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled){
+  background-color: var(--third-color);
+}
+.pagination span{
+  font-weight: 600;
 }

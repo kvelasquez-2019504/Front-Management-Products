@@ -2,6 +2,7 @@ import { useProducts } from "../shared/";
 import { useEffect, useState } from "react";
 import { Table } from "../components/organism/Table";
 import { Form } from "../components/organism/Form";
+import { Pagination } from "../components/molecules/Pagination";
 
 /* Form fields = key={index}
                         text={field.text} 
@@ -13,17 +14,45 @@ import { Form } from "../components/organism/Form";
                         onBlur={field.onBlur}
 */
 export const Product = () => {
-  const { products, isLoading, getProducts } = useProducts();
+  const { products, isLoading, getProducts,addProduct,deleteProduct,updateProduct } = useProducts();
   const headers = ["Nombre", "Descripción", "Precio", "Categoría", "Acciones"];
   const [openForm, setOpenForm] = useState(false);
   const [edit, setEdit] = useState({
     status: false,
     id: null,
   });
+
   let rows = [];
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+
+  const handlePageChange = (page) => setCurrentPage(page);
+
   useEffect(() => {
-    getProducts();
-  }, []);
+    getProducts(currentPage, itemsPerPage);
+  }, [currentPage, itemsPerPage]);
+
+
+  const getProductForm = ()=>{
+    const product ={
+      name: fields.name.value,
+      description: fields.description.value,
+      price: fields.price.value,
+      category: fields.category.value
+    }
+    return product;
+  }
+
+  if (products && products.products ) {
+    rows = products.products.map((product) => [
+        product.id,
+        product.name,
+        product.description,
+        product.price,
+        product.category,
+        "",
+    ]);
+  }
 
   const validateField = (name, value) => {
     let isValid = true;
@@ -100,29 +129,15 @@ export const Product = () => {
     },
   });
 
-  if (products) {
-    rows = products.products.map((product) => [
-      product.id,
-      product.name,
-      product.description,
-      product.price,
-      product.category,
-      "",
-    ]);
-  }
 
-  const clickOnDelete = (id) => {
-    console.log("Eliminando producto con id: ", id);
+  const clickOnDelete = async (id) => {
+    await deleteProduct(id);
+    getProducts(currentPage, itemsPerPage);
   };
 
   const clickOnEdit = (id) => {
     setEdit({ status: true, id: id });
-    console.log(id)
-    const productToEdit = products.products.find((product) =>{
-      if(product.id==id){
-        return product;
-      }
-    });
+    const productToEdit = products.products.find(product => product.id === id);
     if (productToEdit) {
       setFields((prevState) => ({
         ...prevState,
@@ -140,14 +155,41 @@ export const Product = () => {
     setOpenForm(true);
   };
 
-  const submitEvent= (e)=>{
+  const submitEvent= async (e)=>{
     e.preventDefault();
     if(edit.status){
-      console.log("Editando producto con id: ", edit.id);
+      await updateProduct(edit.id, getProductForm());
+      getProducts(currentPage, itemsPerPage);
+      setEdit({status:false, id:null});
+      setOpenForm(false);
+      setFields(prevState=>({
+        ...prevState,
+        name:{...prevState.name, value:"", error:""},
+        description:{...prevState.description, value:"", error:""},
+        price:{...prevState.price, value:"", error:""},
+        category:{...prevState.category, value:"", error:""},
+      }));
     }else{
-      console.log("Creando nuevo producto");
+      await addProduct(getProductForm());
+      getProducts(currentPage, itemsPerPage);
+      setOpenForm(false);
+      setFields(prevState=>({
+        ...prevState,
+        name:{...prevState.name, value:"", error:""},
+        description:{...prevState.description, value:"", error:""},
+        price:{...prevState.price, value:"", error:""},
+        category:{...prevState.category, value:"", error:""},
+      }));
     }
   }
+
+  const handleItemsPerPageChange = (e) => {
+    const newItemsPerPage = parseInt(e.target.value, 10);
+    setCurrentPage(1);
+    setItemsPerPage(newItemsPerPage);
+    getProducts(1, newItemsPerPage); // Reset to first page when items per page changes
+  }
+
 
   const closeForm= (e)=>{
     e.preventDefault();
@@ -175,17 +217,21 @@ export const Product = () => {
           {openForm && <Form id="form-product" fields={fields} actionForm={submitEvent} closeForm={closeForm} />}
         </div>
         <div className="table-section">
-          {isLoading ? (
+          {isLoading && products? (
             <p>Cargando...</p>
           ) : (
-            <Table
-              rows={rows}
-              headers={headers}
-              delete={clickOnDelete}
-              edit={clickOnEdit}
-            />
+              <Table
+                rows={rows}
+                headers={headers}
+                delete={clickOnDelete}
+                edit={clickOnEdit}
+              />
           )}
         </div>
+        {
+          <Pagination currentPage={currentPage} totalPages={products?.totalPages} onPageChange={handlePageChange} 
+                  itemsPerPage={itemsPerPage} onItemsPerPageChange={handleItemsPerPageChange} />
+        }
       </div>
     </>
   );

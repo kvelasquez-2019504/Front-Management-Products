@@ -1,8 +1,8 @@
 
-export const Celds = ({content, children, styles}) => {
+export const Celds = ({content, children, styles, length}) => {
     return (
         <>
-            <td className={"table-cell "+styles}>
+            <td className={"table-cell "+styles} colSpan={length ? length : 1}>
                 {
                     content ? content : children
                 }

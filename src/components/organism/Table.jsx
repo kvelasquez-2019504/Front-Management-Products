@@ -16,11 +16,11 @@ export const Table = ({ rows, headers, delete:deleteProduct, edit:editProduct })
                     {
                         rows.length > 0 ? (
                             rows.map((row, index) => (
-                                <TableRow idRow={row[0]} key={index} columns={removeColumnId(row)} 
+                                <TableRow idRow={row[0]} key={row[0]} columns={removeColumnId(row)} 
                                     delete={deleteProduct} edit={editProduct} />
                             ))
                         ) : (
-                            <TableRow columns={["No hay datos disponibles"]} />
+                            <TableRow columns={headers.length} />
                         )
                     }
                 </tbody>
