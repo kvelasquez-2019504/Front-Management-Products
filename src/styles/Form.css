@@ -53,5 +53,5 @@
 .input-form label:not(.error){
     font-weight: bold;
     color: var(--white-color);
-};
+}
 

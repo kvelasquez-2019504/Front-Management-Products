@@ -1,6 +1,7 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-
+  padding:0px;
+  margin:0px;
+  font-family: Tahoma, Geneva, Verdana, sans-serif;
 
   color-scheme: light dark;
   color: #ffffff;
@@ -13,12 +14,6 @@
   --color-red: #a20000;
   --gold: #ffeb49;
   --blue-color: #111379;
-}
-
-*{
-  padding:0px;
-  margin:0px;
-  font-family: Tahoma, Geneva, Verdana, sans-serif;
 }
 
 input, textarea{
