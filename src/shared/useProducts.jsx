@@ -6,10 +6,23 @@ import {getProducts as apiGetProducts,
 } from "../services/";
 import toast from 'react-hot-toast';
 
+
+/**
+ * Custom hook para gestionar productos (CRUD) y su estado de carga.
+ * Provee funciones para obtener, agregar, actualizar y eliminar productos,
+ * así como el estado de carga y los datos actuales.
+ * @returns {Object} Funciones y estados relacionados con productos.
+ */
 export const useProducts = () => {
+    // Estado para la lista de productos y el indicador de carga
     const [products, setProducts] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
+    /**
+     * Obtiene productos paginados desde el backend y actualiza el estado.
+     * @param {number} currentPage - Página actual.
+     * @param {number} itemsPerPage - Cantidad de productos por página.
+     */
     const getProducts = async (currentPage, itemsPerPage) => {
         setIsLoading(true);
         try {
@@ -26,7 +39,11 @@ export const useProducts = () => {
         } finally { setIsLoading(false); } 
     };
 
-    const addProduct=async(product)=>{
+    /**
+     * Agrega un nuevo producto al backend.
+     * @param {Object} product - Datos del producto a agregar.
+     */
+    const addProduct = async (product) => {
         setIsLoading(true);
         try {
             const data = await apiAddProduct(product);
@@ -40,7 +57,12 @@ export const useProducts = () => {
         }finally{ setIsLoading(false); }
     }
 
-    const updateProduct=async(id, product)=>{
+    /**
+     * Actualiza un producto existente en el backend.
+     * @param {string} id - ID del producto a actualizar.
+     * @param {Object} product - Datos actualizados del producto.
+     */
+    const updateProduct = async (id, product) => {
         setIsLoading(true);
         try {
             const data = await apiUpdateProduct(id, product);
@@ -55,7 +77,11 @@ export const useProducts = () => {
         }finally{ setIsLoading(false); }
     }
 
-    const deleteProduct=async(id)=>{
+    /**
+     * Elimina un producto del backend por su ID.
+     * @param {string} id - ID del producto a eliminar.
+     */
+    const deleteProduct = async (id) => {
         setIsLoading(true);
         try {
             const data = await apiDeleteProduct(id);

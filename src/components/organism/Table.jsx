@@ -1,6 +1,6 @@
 import { TableRow } from "../molecules/TableRow"
 
-
+//TableRow = {idRow, columns, isHeader, delete: deleteProduct, edit: editProduct}
 export const Table = ({ rows, headers, delete:deleteProduct, edit:editProduct }) => {
     const removeColumnId= (data)=>{
         return data.slice(1);
