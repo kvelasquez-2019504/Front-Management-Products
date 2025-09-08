@@ -15,7 +15,8 @@ export const useProducts = () => {
         try {
             const data = await apiGetProducts(currentPage, itemsPerPage);
             if(data.error){
-                toast.error(data.msg || "Error obteniendo productos");
+                let errorMsg = data.msg.map(e=>e.msg).join("\n");
+                toast.error(errorMsg || "Error obteniendo productos");
                 return;
             }
             toast.success(data.msg || "Productos cargados exitosamente");
@@ -44,7 +45,8 @@ export const useProducts = () => {
         try {
             const data = await apiUpdateProduct(id, product);
             if(data.error){
-                toast.error(data.msg || "Error actualizando producto");
+                let errorMsg = data.msg.map(e=>e.msg).join("\n");
+                toast.error(errorMsg || "Error agregando producto");
                 return;
             }
             toast.success(data.msg || "Producto actualizado exitosamente");
@@ -58,7 +60,8 @@ export const useProducts = () => {
         try {
             const data = await apiDeleteProduct(id);
             if(data.error){
-                toast.error(data.msg || "Error eliminando producto");
+                let errorMsg = data.msg.map(e=>e.msg).join("\n");
+                toast.error(errorMsg || "Error eliminando producto");
                 return;
             }
             toast.success(data.msg || "Producto eliminado exitosamente");
