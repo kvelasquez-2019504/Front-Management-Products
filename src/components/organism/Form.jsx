@@ -19,8 +19,8 @@ export const Form = ({id, fields=[], actionForm, closeForm}) => {
                 ))
             }
             <div className="form-buttons">
-                <button type="button" className="submit-button" onClick={(e)=>actionForm(e)}>Enviar</button>
                 <button type="button" className="cancel-button" onClick={closeForm}>Cancelar</button>
+                <button type="button" className="submit-button" onClick={(e)=>actionForm(e)}>Enviar</button>
             </div>
         </form> 
     </>
