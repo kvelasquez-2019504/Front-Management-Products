@@ -30,7 +30,7 @@ export const Product = () => {
 
   useEffect(() => {
     getProducts(currentPage, itemsPerPage);
-  }, [currentPage, itemsPerPage]);
+  }, [currentPage]);
 
 
   const getProductForm = ()=>{
