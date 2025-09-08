@@ -17,7 +17,7 @@ export const getProducts = async (currentPage, itemsPerPage) => {
         console.error("Error fetching products:", error);
         return {
             error:true,
-            msg:error.response?.data?.msg || "Error obteniendo productos",
+            msg:error.response.data.errors,
         }
     }
 }
@@ -30,7 +30,7 @@ export const addProduct = async(data)=>{
         console.error("Error adding product:", error);
         return {
             error:true,
-            msg:error.response?.data?.msg || "Error agregando producto"
+            msg:error.response.data.errors
         }
     }
 }
@@ -43,7 +43,7 @@ export const updateProduct = async(id, data)=>{
         console.error("Error updating product:", error);
         return {
             error:true,
-            msg:error.response?.data?.msg || "Error actualizando producto"
+            msg:error.response.data.errors
         }
     }
 }
@@ -56,7 +56,7 @@ export const deleteProduct = async(id)=>{
         console.error("Error deleting product:", error);
         return {
             error:true,
-            msg:error.response?.data?.msg || "Error eliminando producto"
+            msg:error.response.data.errors
         }
     }
 }
